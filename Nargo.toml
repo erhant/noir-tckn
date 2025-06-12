@@ -1,0 +1,6 @@
+[package]
+name = "tckn"
+type = "bin"
+authors = ["erhant"]
+
+[dependencies]
