@@ -1,5 +1,9 @@
 // mod v0;
 // use v0::validate_tckn;
+
+// mod v0_5;
+// use v0_5::validate_tckn;
+
 mod v1;
 use v1::validate_tckn;
 
@@ -10,7 +14,7 @@ fn main(tckn: [Field; 11]) {
 #[test]
 fn test_valid_tckn() {
     // 10000000146 (smallest prefixed TCKN)
-    let valid_tckn: [Field; 11] = [1, 0, 0, 0, 0, 0, 0, 0, 1, 4, 6];
+    let valid_tckn: [_; 11] = [1, 0, 0, 0, 0, 0, 0, 0, 1, 4, 6];
     validate_tckn(valid_tckn);
 }
 
@@ -22,32 +26,32 @@ fn test_another_valid_tckn() {
     // 10th digit: (25*7 + 20*9) % 10 = (175 + 180) % 10 = 355 % 10 = 5
     // 11th digit: (25*8) % 10 = 200 % 10 = 0
     // sum of first 10 = 1+2+3+4+5+6+7+8+9+5 = 50, 50%10 = 0 (valid)
-    let valid_tckn2: [Field; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 0];
+    let valid_tckn2: [_; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 0];
     validate_tckn(valid_tckn2);
 }
 
 #[test(should_fail)]
 fn test_invalid_first_digit() {
     // first digit cannot be 0
-    let invalid_tckn: [Field; 11] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    let invalid_tckn: [_; 11] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     validate_tckn(invalid_tckn);
 }
 
 #[test(should_fail)]
 fn test_invalid_last_digit_odd() {
     // last digit must be even
-    let invalid_tckn: [Field; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 3];
+    let invalid_tckn: [_; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 3];
     validate_tckn(invalid_tckn);
 }
 
 #[test(should_fail)]
 fn test_invalid_tenth_digit() {
-    let invalid_tckn: [Field; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 7, 0];
+    let invalid_tckn: [_; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 7, 0];
     validate_tckn(invalid_tckn);
 }
 
 #[test(should_fail)]
 fn test_invalid_eleventh_digit() {
-    let invalid_tckn: [Field; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 2];
+    let invalid_tckn: [_; 11] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 2];
     validate_tckn(invalid_tckn);
 }

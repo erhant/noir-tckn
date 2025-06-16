@@ -46,6 +46,25 @@ nargo execute
 > tckn = ["1","0","0","0","0","0","0","0","1","4","6"]
 > ```
 
+## Performance
+
+We have 3 versions implemented:
+
+- [`v0`](./src/v0.nr) uses a `Field` input, does occasional castings.
+- [`v0.5`](./src/v0_5.nr) gets rids of casting around the place by accepting the casted value as input, albeit at the cost of more gates.
+- [`v1`](./src/v1.nr) uses a better evenness check & unconstrained and hinted mod 10 trick.
+
+| Version | ACIR Opcodes | Circuit Size |
+| ------- | ------------ | ------------ |
+| v0      | 93           | 3614         |
+| v0.5    | 122          | 2910         |
+| v1      | 50           | 79           |
+
+We use the following commands for this:
+
+- `nargo info` to get ACIR opcodes
+- `bb gates -b ./target/tckn.json` to get Circuit Size
+
 ## Testing
 
 The project includes test cases for valid and invalid TCKN numbers:
