@@ -3,10 +3,10 @@ name: test
 on:
   push:
     branches: [main]
-  paths:
-    - "src/**"
-    - ".github/workflows/test.yml"
-    - "Nargo.toml"
+    paths:
+      - "src/**"
+      - ".github/workflows/test.yml"
+      - "Nargo.toml"
 
 jobs:
   test:
