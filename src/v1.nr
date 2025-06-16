@@ -11,8 +11,7 @@
 // +---------+--------------------+----------------------+--------------+-----------------+
 
 // a. use bit check for evenness
-// d. use the optimal digit checks
-
+// b. use the optimal digit checks
 unconstrained fn to_mod_10(num: Field) -> (Field, Field) {
     let n_quot = ((num as u32) / 10) as Field;
     let n_rem = ((num as u32) % 10) as Field;
@@ -21,11 +20,11 @@ unconstrained fn to_mod_10(num: Field) -> (Field, Field) {
 
 /// Asserts that the last digit of `num` is equal to `target`.
 fn assert_eq_mod_10(num: Field, target: Field) {
-    // safety: we assume num is a valid Field and target is a digit (0-9)
+    // safety: we assume target is a digit (0-9)
     let (num_quot, num_rem) = unsafe { to_mod_10(num) };
     // we dont have to check if num_rem is less than 10, because we know target is a digit
     assert_eq(num_rem, target, "assert_eq_mod_10: last digit must equal target");
-    assert_eq(num_quot * 10 + num_rem, num, "assert_eq_mod_10: a10 + a1 * 10 must equal num");
+    assert_eq(num_quot * 10 + num_rem, num, "assert_eq_mod_10: quot + rem * 10 must equal num");
 }
 
 pub fn validate_tckn(tckn: [Field; 11]) {
