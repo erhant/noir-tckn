@@ -1,0 +1,21 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  paths:
+    - "src/**"
+    - ".github/workflows/test.yml"
+    - "Nargo.toml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ClarifiedLabs/aztec-test@v1
+        with:
+          aztec-version: "0.71.0"
+          # optional: disable caching if needed
+          # enable-caching: 'false'
